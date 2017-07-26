@@ -17,7 +17,7 @@ else
 fi
 
 # Delete old files
-old_dumps=$(ls -1 $BACKUP_DATA_DIR/dump* | head -n -$BACKUP_KEEP)
+old_dumps=$(ls -1 $BACKUP_DATA_DIR | head -n -$BACKUP_KEEP)
 if [ "$old_dumps" ]; then
     echo "Deleting: $old_dumps"
     rm -r $old_dumps
