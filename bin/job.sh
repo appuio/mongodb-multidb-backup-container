@@ -7,7 +7,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-printf '%s' "$dump" | gzip > $BACKUP_DATA_DIR/dump-${DATE}.sql.gz
+printf '%s' "$dump"
 
 if [ $? -eq 0 ]; then
     echo "backup created: ${DATE}"
