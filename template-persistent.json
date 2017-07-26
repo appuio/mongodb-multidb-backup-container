@@ -29,20 +29,6 @@
                 "triggers": [
                     {
                         "type": "ConfigChange"
-                    },
-                    {
-                        "type": "ImageChange",
-                        "imageChangeParams": {
-                            "automatic": true,
-                            "containerNames": [
-                                "mongodb-multidb-backup-container"
-                            ],
-                            "from": {
-                                "kind": "ImageStreamTag",
-                                "namespace": "appuio",
-                                "name": "mongodb-multidb-backup-container:3.2"
-                            }
-                        }
                     }
                 ],
                 "replicas": 1,
@@ -55,7 +41,7 @@
                     "metadata": {
                         "labels": {
                             "app": "${APP_NAME}",
-                            "deploymentconfig": "backup"
+                            "deploymentconfig": "mongodb-backup-persistent"
                         }
                     },
                     "spec": {
@@ -70,7 +56,7 @@
                         "containers": [
                             {
                                 "name": "${APP_NAME}",
-                                "image": "appuio/mongodb-multidb-backup-container",
+                                "image": "appuio/mongodb-multidb-backup-container:3.2",
                                 "env": [
                                     {
                                         "name": "MONGODB_USER",
@@ -81,12 +67,8 @@
                                         "value": "${MONGODB_PASSWORD}"
                                     },
                                     {
-                                        "name": "MYSQL_SERVICE_HOST",
-                                        "value": "${MYSQL_SERVICE_HOST}"
-                                    },
-                                    {
-                                        "name": "MYSQL_DATABASE",
-                                        "value": "${MYSQL_DATABASE}"
+                                        "name": "MONGODB_HOST",
+                                        "value": "${MONGODB_HOST}"
                                     },
                                     {
                                         "name": "BACKUP_DATA_DIR",
@@ -147,22 +129,17 @@
     ],
     "parameters": [
         {
-            "name": "MYSQL_SERVICE_HOST",
+            "name": "MONGODB_HOST",
             "description": "Database host name",
-            "value": "mysql"
+            "value": "mongodb"
         },
         {
-            "name": "MYSQL_DATABASE",
-            "description": "Database name",
-            "value": "database"
-        },
-        {
-            "name": "MYSQL_USER",
+            "name": "MONGODB_USER",
             "description": "Database user name",
             "value": "user"
         },
         {
-            "name": "MYSQL_PASSWORD",
+            "name": "MONGODB_PASSWORD",
             "description": "Database user password",
             "value": "pw"
         },
@@ -197,7 +174,7 @@
             "name": "APP_NAME",
             "displayName": "App Name",
             "description": "App name for internal openshift labels",
-            "value": "mysql-simple-backup-container",
+            "value": "mongodb-multidb-backup-container",
             "required": true
         }
     ]
