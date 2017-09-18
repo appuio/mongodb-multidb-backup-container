@@ -20,5 +20,6 @@ fi
 old_dumps=$(ls -1 $BACKUP_DATA_DIR | head -n -$BACKUP_KEEP)
 if [ "$old_dumps" ]; then
     echo "Deleting: $old_dumps"
+    cd $BACKUP_DATA_DIR
     rm -r $old_dumps
 fi
