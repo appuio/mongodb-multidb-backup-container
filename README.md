@@ -1,3 +1,8 @@
+# Deprecated
+
+!!! Use https://github.com/appuio/mongodb-backup instead!!!
+
+
 # APPUiO Multidb Mongodb Backup Pod
 
 ## How to deploy the backup container
